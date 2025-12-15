@@ -18,9 +18,9 @@ class CredentialAlreadyExists(Exception):
         super().__init__(self.message)
 
 class Keyring:
-    def __init__(self) -> None:
+    def __init__(self, keyring_path: str | None = None) -> None:
         home_path = os.path.expanduser('~')
-        self.keyring_path = os.path.join(home_path, '.custom_keyring')
+        self.keyring_path = keyring_path if keyring_path else os.path.join(home_path, '.custom_keyring')
         self.data_file = 'data.json'
 
     def save_password(self, service_name: str, username: str, password: str):
